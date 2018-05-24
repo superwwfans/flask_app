@@ -1,0 +1,61 @@
+﻿{% extends 'blog/base/base.html' %}
+  <!--/超小屏幕可见-->
+
+    {% block content %}
+      <div class="content-block new-content">
+        <h2 class="title"><strong>最新文章</strong></h2>
+        <div class="row">
+          {% for article in articles %}
+            <div class="news-list">
+                <div class="news-img col-xs-5 col-sm-5 col-md-4">
+                    <a target="_blank" href="/article/detail/{{ article.id }}">
+                        <img src="{{ article.image_path }}" alt="" style="width: 180px; height: 105px">
+                    </a>
+                </div>
+                <div class="news-info col-xs-7 col-sm-7 col-md-8">
+                  <dl>
+                    <dt> <a href="/article/detail/{{ article.id }}" target="_blank" > {{ article.title }} </a> </dt>
+                    <dd>
+                        <span class="name glyphicon glyphicon-education">
+                            {{ article.users.username }}
+                        </span>
+                        <span class="identity"></span>
+                        <span class="time glyphicon glyphicon-time">
+                            {{ article.create_time }}
+                        </span>
+                    </dd>
+                    <dd class="text">{{ article.describe }}</dd>
+                  </dl>
+                  <div class="news_bot col-sm-7 col-md-8"> <span class="tags visible-lg visible-md">
+                      {% for tag in article.tags %}
+                        <a href="">{{ tag.name }}</a>
+                      {% endfor %}
+                    </span> <span class="look"> 共 <strong>{{ article.read_num }}</strong> 人阅读
+                  </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!--<div class="news-more" id="pagination">
+        	<a href="">查看更多</a>
+        </div>-->
+      </div>
+        <div class="quotes" style="margin-top:15px">
+          <nav>
+            <ul class="pagination pagenav">
+              <li {% if not pagination.has_prev %} class="disabled" {% endif %}>
+                  <a  href="{% if pagination.has_prev %}{{ url_for('blog.index', page = pagination.page - 1) }} {% else %} #{% endif %}" aria-label="Previous"> <span aria-hidden="true">上一页</span> </a>
+              </li>
+                {% for p in pagination.iter_pages() %}
+                    <li {% if pagination.page == p %} class="active"{% endif %}>
+                        <a href="{{ url_for('blog.index', page = p) }}">{{ p }}</a>
+                    </li>
+                {% endfor %}
+              <li  {% if not pagination.has_next %} class="disabled" {% endif %}>
+                  <a href="{% if pagination.has_next %}{{ url_for('blog.index', page = pagination.page + 1) }} {% else %} #{% endif %}" aria-label="Next"> <span aria-hidden="true">下一页</span> </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+    {% endblock %}
+  <!--/内容-->

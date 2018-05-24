@@ -1,0 +1,14 @@
+  {% extends 'cms/base/base.html' %}
+     {% block main %}
+     <h1 class="page-header">修改栏目</h1>
+      <form action="/admin/add_category/" method="post">
+          <input type="hidden" class="csrf_token" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden"  name="id" value="{{ category.id }}">
+          <div class="form-group">
+            <label for="category-name">栏目名称</label>
+            <input type="text" id="category-name" name="name" value="{{ category.name }}" class="form-control" placeholder="在此处输入栏目名称" required autocomplete="off">
+          <span class="prompt-text">这将是它在站点上显示的名字。</span> </div>
+        <button class="btn btn-primary" type="submit" name="submit">更新</button>
+      </form>
+    {% endblock %}
+
