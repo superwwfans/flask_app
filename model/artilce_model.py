@@ -6,10 +6,10 @@
 """
     关于文章的模型类
 """
-from ext import db
 from uuid import uuid4
 from datetime import datetime
 
+from globals import db
 from libs.search_libs.searchmixin import SearchableMixin
 
 

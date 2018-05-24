@@ -5,13 +5,18 @@
 # author: huang-xin-dong
 # about: 用户登录记录
 # ---------------------------------------------------------
-from model.artilce_model import Record
-from ext import db
-from sqlalchemy.exc import SQLAlchemyError
+"""
+    记录用户访问
+"""
 import traceback
-from flask import session, request
 from random import randint
 from datetime import datetime
+
+from sqlalchemy.exc import SQLAlchemyError
+from flask import session, request
+
+from globals import db
+from model.artilce_model import Record
 
 
 model_dict = {

@@ -17,7 +17,7 @@ from flask import render_template, g, current_app
 
 from flask_wtf.csrf import CSRFError
 
-from ext import app
+from globals import app
 
 from blueprint_list import blueprint_list
 

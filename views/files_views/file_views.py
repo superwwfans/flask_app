@@ -6,8 +6,7 @@
 """
     文件上传
 """
-from flask import (Blueprint, render_template,
-                   g, request, redirect, url_for, jsonify, send_from_directory)
+from flask import (Blueprint, request, jsonify)
 
 from libs.files_libs.files_libs import files_upload_libs
 

@@ -5,12 +5,14 @@
 # author: huang-xin-dong
 # about: 关于博客主页显示库文件
 # ---------------------------------------------------------
+import traceback
+
 from flask import g
+from sqlalchemy.exc import SQLAlchemyError
+
 from model.artilce_model import Article, Comment, Category, Tag, Record
 from model.flink_models import Flink
-from sqlalchemy.exc import SQLAlchemyError
-import traceback
-from ext import db, rd
+from globals import db
 from send_email_task import send_email
 
 model_dict = {
@@ -102,22 +104,24 @@ def add_comment_libs(article_id, comment_content):
     """
     添加评论
     :param article_id:
-
     :param comment_content:
     :return:
     """
-    try:
-        comment = Comment()
-        comment.user_id = g.current_user.id
-        comment.article_id = article_id
-        comment.content = comment_content.strip('')
-        db.session.add(comment)
-        db.session.commit()
-        send_email.delay(title='有人评论了你的文章', content=comment.content)
-        return {"status": True, "msg": "添加评论成功"}
-    except (AttributeError, SQLAlchemyError):
-        db.session.rollback()
-        print('添加评论异常', traceback.format_exc())
+    if article_id and comment_content:
+        try:
+            comment = Comment()
+            comment.user_id = g.current_user.id
+            comment.article_id = article_id
+            comment.content = comment_content.strip('')
+            db.session.add(comment)
+            db.session.commit()
+            send_email.delay(title='有人评论了你的文章', content=comment.content)
+            return {"status": True, "msg": "添加评论成功"}
+        except (AttributeError, SQLAlchemyError):
+            db.session.rollback()
+            print('添加评论异常', traceback.format_exc())
+            return {"status": False, "msg": "添加评论失败"}
+    return {"status": False, "msg": "缺少文章，或评论内容"}
 
 
 def get_category_articles_libs(category_name):

@@ -6,10 +6,11 @@
 """
     关于博客主页的视图函数
 """
-from flask import (Blueprint, render_template, send_from_directory,
-                   g, request, redirect, url_for, jsonify, abort)
 from threading import Lock
-from werkzeug.contrib.fixers import ProxyFix
+
+from flask import (Blueprint, render_template, send_from_directory,
+                   request, redirect, url_for, jsonify, abort)
+
 
 from libs.blog.blog_libs import article_list_libs, get_deticle_libs,\
                                 add_comment_libs, get_base_info, get_category_articles_libs, article_add_like_libs
@@ -39,10 +40,14 @@ def index():
 
 @blog_blueprint.route('/article/detail/<article_id>')
 def detail(article_id):
-    """ 文章详情 """
-    context = get_deticle_libs(article_id)
+    """
+    文章详情
+    :param article_id: 文章id
+    :return:
+    """
+    article_info_dict = get_deticle_libs(article_id)
     if context:
-        return render_template('blog/content.html', **context)
+        return render_template('blog/content.html', **article_info_dict)
     else:
         abort(404)
 
@@ -61,7 +66,11 @@ def add_comment():
 
 @blog_blueprint.route('/category/<category_name>', methods=["GET"])
 def category(category_name):
-    """ 分类列表 """
+    """
+    分类列表
+    :param category_name:
+    :return:
+    """
     articles = get_category_articles_libs(category_name)
     if articles:
         return render_template('blog/category_list.html', articles=articles)
@@ -73,8 +82,8 @@ def category(category_name):
 def seearch():
     """ 全文搜索 """
     content = request.form.get("content", None)
-    context = search_libs(content)
-    return render_template('blog/search.html', **context)
+    search_result_dict = search_libs(content)
+    return render_template('blog/search.html', **search_result_dict)
 
 
 @blog_blueprint.route('/files_look/')

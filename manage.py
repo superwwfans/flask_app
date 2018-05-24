@@ -8,8 +8,8 @@
 """
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
-from ext import db
-from create_app import app
+from globals import db, app
+
 from model.user_models import User
 
 manager = Manager(app)

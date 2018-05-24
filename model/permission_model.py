@@ -5,7 +5,7 @@
 # author: huang-xin-dong
 # about: 权限类
 # ---------------------------------------------------------
-from ext import db
+from globals import db
 
 
 class Handler(db.Model):

@@ -8,9 +8,9 @@
 """
 import pbkdf2
 from uuid import uuid4
-from ext import db
 import hashlib
 
+from globals import db
 from model.permission_model import UserToRole
 
 

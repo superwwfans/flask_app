@@ -5,9 +5,13 @@
 # author: huang-xin-dong
 # about: 验证权限库函数
 # ---------------------------------------------------------
-
+"""
+    权限验证
+"""
 import functools
+
 from flask import g, abort
+
 from model.permission_model import Menu, Handler
 
 

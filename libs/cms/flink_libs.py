@@ -5,9 +5,13 @@
 # author: huang-xin-dong
 # about: 关于友情链接的增删查改
 # ---------------------------------------------------------
-from ext import db
-from model.flink_models import Flink
+"""
+    处理友情链接库函数
+"""
 from sqlalchemy.exc import SQLAlchemyError
+
+from globals import db
+from model.flink_models import Flink
 
 
 def add_flink_libs(name, url):
@@ -31,6 +35,7 @@ def add_flink_libs(name, url):
 
 def get_flinks_list():
     """
+    获取友情链接
     :return:
     """
     friend_links = Flink.query.all()

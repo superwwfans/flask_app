@@ -7,7 +7,7 @@
     About Permission module include: add , delete, update
 """
 
-from flask import Blueprint, request, session, redirect, url_for, render_template, jsonify
+from flask import Blueprint, request, redirect, url_for, render_template
 
 from libs.permission.permission_interface_libs.permission_interface_libs import handler_permission
 
@@ -87,16 +87,16 @@ def role_add_permission():
 @permission_blueprint.route('/add_menu/', methods=['POST'])
 def add_menu():
     """添加菜单控制"""
-    permissionid = request.form.get('permissionid', '')
+    permission_id = request.form.get('permissionid', '')
     name = request.form.get('name', '')
-    permission_add_menu(name, permissionid,)
+    permission_add_menu(name, permission_id,)
     return redirect(url_for('permission.manage'))
 
 
 @permission_blueprint.route('/add_handler/', methods=['POST'])
 def add_handler():
     """添加handler控制"""
-    permissionid = request.form.get('permissionid', '')
+    permission_id = request.form.get('permissionid', '')
     name = request.form.get('name', '')
-    permission_add_handler(name, permissionid,)
+    permission_add_handler(name, permission_id,)
     return redirect(url_for('permission.manage'))

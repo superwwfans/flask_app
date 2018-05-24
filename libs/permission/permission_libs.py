@@ -4,12 +4,10 @@
 # time:
 # author: huang-xin-dong
 """
-    文档说明
+    增加权限,增加角色
 """
-from ext import db
-
+from globals import db
 from model.user_models import User
-
 from model.permission_model import Role, Permission, Handler, Menu
 
 

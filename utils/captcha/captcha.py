@@ -5,13 +5,20 @@
 # author: huang-xin-dong
 # about:
 # ---------------------------------------------------------
+"""
+    生成图片验证码
+"""
 from random import randint
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
+from uuid import uuid4
 
 
 def create_captcha():
-    from uuid import uuid4
+    """
+    生成验证码图片,将随机生成的验证码绘制在图片上
+    :return: 返回图片，验证码
+    """
     uu = str(uuid4())
     text = uu[:4]
     t = [ord(i) for i in uu]
@@ -26,10 +33,6 @@ def create_captcha():
     font_path = "utils/captcha/font/Arial.ttf"
     font = ImageFont.truetype(font_path, height-10)
     draw = ImageDraw.Draw(image)
-    # 生成验证码
-    # text =''.join([choice(printable[:62]) for i in xrange(4)])
-    # font_width, font_height = font.getsize(text)
-    # 把验证码写到画布上
     draw.text((10, 8), text, font=font, fill=font_color)
     # 绘制线条
     for i in range(0, 5):
@@ -47,8 +50,8 @@ def create_captcha():
         content = out.getvalue()
         out.close()
         return text, content
-    except Exception as e:
-        print(e)
+    except Exception:
+       return None
 
 
 

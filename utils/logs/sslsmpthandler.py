@@ -7,8 +7,8 @@
 # ---------------------------------------------------------
 
 import smtplib
-import logging
-from logging.handlers import RotatingFileHandler, SMTPHandler
+
+from logging.handlers import SMTPHandler
 from email.mime.text import MIMEText
 
 

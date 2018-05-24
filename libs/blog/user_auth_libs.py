@@ -5,21 +5,22 @@
 # author: huang-xin-dong
 # about: 
 # ---------------------------------------------------------
+"""
+    用户登录验证，注册验证
+"""
 import re
 from functools import wraps
 import traceback
 from datetime import datetime
-import os
 
 from sqlalchemy.exc import SQLAlchemyError
 from flask import session, redirect, url_for, g
 
-from ext import rd as conn
-from ext import db
+from globals import rd as conn
+from globals import db
 from utils.captcha.captcha import create_captcha
 from model.user_models import User
 
-from model.permission_model import Role, Handler
 
 def login_required(func):
     """ 验证用户是否登录
@@ -60,7 +61,6 @@ def create_captcha_img(pre_code, code):
         conn.delete('captcha:%s' % pre_code)
     text, img = create_captcha()
     conn.setex('captcha:%s' % code, text.lower(), 60)
-    print('=========', conn.get("captcha:%s" % code))
     return img
 
 
@@ -152,5 +152,5 @@ def auth_login_libs(email, password,  verify_code, timestamp, remember_me):
         db.session.commit()
         return {"status": True, "msg": "登录成功!"}
     except (AttributeError, SQLAlchemyError) as e:
-        print(e)
+        db.session.rollback()
         return {"status": False, "msg": "内部异常!"}

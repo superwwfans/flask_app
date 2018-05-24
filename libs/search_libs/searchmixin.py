@@ -5,7 +5,7 @@
 # author: huang-xin-dong
 # about: 
 # ---------------------------------------------------------
-from ext import db
+from globals import db
 from libs.search_libs.search import add_to_index, remove_from_index, query_index
 
 

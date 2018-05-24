@@ -6,10 +6,13 @@
 # about: 用户登录和注册
 # ---------------------------------------------------------
 
-from flask import Blueprint, render_template, redirect, request, url_for, session, jsonify
+from flask import (Blueprint, render_template,
+                   redirect, request, url_for,
+                   session, jsonify)
 
-from libs.cms.record_libs import save_user_record
-from libs.blog.user_auth_libs import create_captcha_img, auth_register_libs, auth_login_libs
+from libs.blog.user_auth_libs import (create_captcha_img,
+                                      auth_register_libs,
+                                      auth_login_libs)
 
 
 user_auth_blueprint = Blueprint('user', __name__, url_prefix='/user/auth')

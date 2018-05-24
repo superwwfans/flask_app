@@ -5,19 +5,24 @@
 # author: huang-xin-dong
 # about: 
 # ---------------------------------------------------------
-
+"""
+    全文搜索接口
+"""
 
 from model.artilce_model import Article
 
 
 def search_libs(content):
     """
-    :param content:
+    全文搜索
+    :param content:用户输入内容
     :return:
     """
-    articles, total = Article.search(content)
-    context = {
-        "articles": articles,
-    }
-
-    return context
+    if content:
+        articles, total = Article.search(content)
+        context = {
+            "articles": articles,
+        }
+        return context
+    else:
+         return None

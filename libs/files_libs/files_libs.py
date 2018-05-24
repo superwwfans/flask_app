@@ -8,11 +8,10 @@
 """
 from uuid import uuid4
 import traceback
-import os
 
 from flask import g
 
-from ext import db, basedir
+from globals import db, basedir
 from model.files_models import Files
 
 

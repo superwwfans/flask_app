@@ -7,7 +7,7 @@
     后台应用蓝图
 """
 from flask import (Blueprint, render_template,
-                   g, request, redirect, url_for, jsonify)
+                   request, redirect, url_for, jsonify)
 from libs.blog.user_auth_libs import login_required
 
 from libs.cms.article_libs import (system_info_libs,
@@ -44,7 +44,7 @@ def system_info():
 def index():
     """ 后台首页
     """
-    return render_template('cms/index.html', )
+    return render_template('cms/index.html')
 
 
 @cms_blueprint.route('/article/')
@@ -83,8 +83,8 @@ def update_article():
     """ 修改文章
     """
     article_id = request.args.get('id', '')
-    article = get_article_libs(article_id)
-    return render_template('cms/update-article.html', article=article)
+    article_obj = get_article_libs(article_id)
+    return render_template('cms/update-article.html', article=article_obj)
 
 
 @cms_blueprint.route('/delete_article/', methods=["POST", "GET"])
@@ -157,8 +157,8 @@ def update_category():
     """ 更新分类
     """
     category_id = request.args.get('id', '')
-    category = get_category_libs(category_id)
-    return render_template('cms/update-category.html', category=category)
+    category_obj = get_category_libs(category_id)
+    return render_template('cms/update-category.html', category=category_obj)
 
 
 @cms_blueprint.route('/friend_link/', methods=["GET", "POST"])

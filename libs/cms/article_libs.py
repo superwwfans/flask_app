@@ -7,14 +7,15 @@
     处理文章, 分类库函数
 """
 from datetime import datetime
+import traceback
+
 from flask import request, g
+from sqlalchemy.exc import SQLAlchemyError
+
+from globals import db
+from libs.files_libs.files_libs import files_upload_libs
 from model.artilce_model import Article, Category, Comment, Tag, Record
 from model.user_models import User
-
-from libs.files_libs.files_libs import files_upload_libs
-import traceback
-from ext import db
-from sqlalchemy.exc import SQLAlchemyError
 
 
 model_dict = {
