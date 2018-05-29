@@ -11,7 +11,7 @@ import traceback
 
 from flask import g
 
-from globals import db, basedir
+from extra import db, basedir
 from model.files_models import Files
 
 

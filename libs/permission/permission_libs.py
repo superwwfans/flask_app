@@ -6,7 +6,7 @@
 """
     增加权限,增加角色
 """
-from globals import db
+from extra import db
 from model.user_models import User
 from model.permission_model import Role, Permission, Handler, Menu
 

@@ -5,7 +5,7 @@
 # author: huang-xin-dong
 # about: 友情链接模型
 # ---------------------------------------------------------
-from globals import db
+from extra import db
 
 
 class Flink(db.Model):

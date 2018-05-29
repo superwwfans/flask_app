@@ -12,7 +12,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from model.artilce_model import Article, Comment, Category, Tag, Record
 from model.flink_models import Flink
-from globals import db
+from extra import db
 from send_email_task import send_email
 
 model_dict = {

@@ -20,10 +20,6 @@ from libs.blog.search_libs import search_libs
 blog_blueprint = Blueprint('blog', __name__)
 
 
-blog_blueprint._before_request_lock = Lock()
-blog_blueprint._got_first_request = False
-
-
 @blog_blueprint.context_processor
 def context():
     context = get_base_info()

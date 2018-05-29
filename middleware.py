@@ -2,28 +2,19 @@
 # coding=utf-8
 
 """
-
-FileName = ''
-time:
-author: huang-xin-dong
-
-中间件,处理http error 获取当前用户信息
+处理http error 获取当前用户信息
 
 """
-
-from libs.blog.user_auth_libs import get_current_user
-
-from flask import render_template, g, current_app
-
+from flask import render_template, g
 from flask_wtf.csrf import CSRFError
 
-from globals import app
+from libs.blog.user_auth_libs import get_current_user
+from extra import app
+from blueprint_list import blueprints
 
-from blueprint_list import blueprint_list
 
-
-for blueprint in blueprint_list:
-    app.register_blueprint(blueprint)
+for b in blueprints:
+    app.register_blueprint(b)
 
 
 @app.errorhandler(CSRFError)

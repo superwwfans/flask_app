@@ -8,9 +8,14 @@
 """
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
-from globals import db, app
+from middleware import app
+from extra import db    
 
 from model.user_models import User
+from model.artilce_model import Article, Tag, Category, Comment
+from model.files_models import Files
+from model.flink_models import Flink
+
 
 manager = Manager(app)
 migrate = Migrate(app, db)
@@ -30,4 +35,5 @@ def superuser(name, password):
 
 if __name__ == '__main__':
     print(app.url_map)
+
     manager.run()

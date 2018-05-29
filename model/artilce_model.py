@@ -9,7 +9,7 @@
 from uuid import uuid4
 from datetime import datetime
 
-from globals import db
+from extra import db
 from libs.search_libs.searchmixin import SearchableMixin
 
 

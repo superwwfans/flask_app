@@ -8,7 +8,7 @@
 """
 import hashlib
 from datetime import datetime
-from globals import db
+from extra import db
 
 
 def hash_data(datas):

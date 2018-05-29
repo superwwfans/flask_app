@@ -13,5 +13,10 @@ from views.files_views.file_views import files_blueprint
 from views.cms_views.record_view import cms_record_blueprint
 from views.cms_views.permission_view import permission_blueprint
 
-blueprint_list = [cms_blueprint, user_auth_blueprint, blog_blueprint,
-                  files_blueprint, cms_record_blueprint, permission_blueprint]
+blueprints = [cms_blueprint,
+              user_auth_blueprint,
+              blog_blueprint,
+              files_blueprint,
+              cms_record_blueprint,
+              permission_blueprint
+              ]
