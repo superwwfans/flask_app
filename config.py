@@ -24,13 +24,13 @@ class Config(object):
 
     ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
-    MAIL_SERVER = os.environ.get('MAIL_SERVER')
-    MAIL_PORT = int(165)
+    LOG_TO_STDOUT = False
+    MAIL_SERVER = "smtp.163.com"
+    MAIL_PORT = 465
     MAIL_USE_SSL = True
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    ADMINS = [os.environ.get('ADMINS')]
+    MAIL_USERNAME = "forver22huang@163.com"
+    MAIL_PASSWORD = "HXD112301ww"
+    ADMINS = ["921261233@qq.com"]
 
     ELASTICSEARCH_URL = 'http://localhost:9200'
 
@@ -47,5 +47,4 @@ class Config(object):
     CELERY_TASK_EXPIRES = 60 * 60 * 24
 
     CELRY_ACCEPT_CONTENT = ["json"]
-
 

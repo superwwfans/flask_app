@@ -18,7 +18,8 @@ from libs.cms.article_libs import (system_info_libs,
                                    get_article_libs,
                                    delete_category_libs,
                                    get_articles_list_libs,
-                                   get_comments_list_libs)
+                                   get_comments_list_libs,
+                                   delete_comment_libs)
 
 from libs.cms.flink_libs import add_flink_libs, get_flinks_list
 
@@ -28,7 +29,7 @@ cms_blueprint = Blueprint('cms', __name__, url_prefix='/admin')
 
 
 @cms_blueprint.before_request
-@handler_permission('before_request', 'handler')
+# @handler_permission('before_request', 'handler')
 def before_request():
     pass
 
@@ -104,7 +105,11 @@ def delete_article():
 def delete_comment():
     """ 删除评论
     """
-    pass
+    comment_id = request.args.get("comment_id", None)
+    comment_delete_result = delete_comment_libs(comment_id)
+    if comment_delete_result["status"]:
+        return redirect(url_for('cms.comment'))
+    return redirect(url_for('cms.comment'))
 
 
 @cms_blueprint.route('/comment/')

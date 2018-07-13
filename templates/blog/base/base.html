@@ -41,22 +41,18 @@ window.onload = function() {
          {% if g.current_user %}
             <li class="active"><a><span class="glyphicon glyphicon-user" style="color: #6475e6;"></span>{{ g.current_user.username }}</a></li>
          {% else %}
-             <li class="active"><a href="/user/auth/login/" target="_blank"><span class="glyphicon glyphicon-user" style="color: #6475e6;"></span>登录本站</a></li>
+             <li class="active"><a href="/user/auth/login/" target="_blank"><span class="glyphicon glyphicon-log-in" style="color: #6475e6;"></span>登录本站</a></li>
         {% endif %}
         {% for category in categories %}
-            <li><a href="/category/{{ category.name }}"><span class="glyphicon glyphicon-tags" style="color: #26aae6;"></span>{{ category.name }} <span class="badge">{{ category.articles|length }}</span></a></li>
+            <li><a href="/category/{{ category.name }}"><span class="glyphicon glyphicon-th-list" style="color: #727a7d;"></span>{{ category.name }} <span class="badge">{{ category.articles|length }}</span></a></li>
         {% endfor %}
+        <li class="active"><a href="{{ url_for("blog.about_me") }}"><span class="glyphicon glyphicon-user" style="color: #607D8B;"></span>About Me</a></li>
       </ul>
         <div class="feeds">
             <a class="feed feed-rss" href="https://github.com/superwwfans" target="_blank"><i></i>GitHub</a>
 	        <a class="feed feed-weixin" data-toggle="popover" data-trigger="hover" title="微信扫一扫"  data-html="true" data-content="<img style='width:200px; height:200px' src='/static/blog/images/qrcode.jpg' alt=''>" href="javascript:;" target="_blank"><i></i>公众号</a>
       </div>
-      <div class="wall">
-         <p style="font-size: 20px"><span class="glyphicon glyphicon-link" aria-hidden="true"></span>友情链接</p>
-          {% for flink in flinks %}
-          <a href="{{ flink.url }}" target="_blank" style="font-size: 15px">{{ flink.name }}</a> <br>
-          {% endfor %}
-      </div>
+
     </div>
     <!--/超小屏幕不显示-->
     <div class="visible-xs header-xs"><!--超小屏幕可见-->
@@ -158,10 +154,10 @@ window.onload = function() {
 </script>
 <script type="text/javascript">
 //页面加载
-$('body').show();
-$('.version').text(NProgress.version);
-NProgress.start();
-setTimeout(function() { NProgress.done(); $('.fade').removeClass('out'); }, 1000);
+{#$('body').show();#}
+{#$('.version').text(NProgress.version);#}
+{#NProgress.start();#}
+{#setTimeout(function() { NProgress.done(); $('.fade').removeClass('out'); }, 1000);#}
 //返回顶部按钮
 $(function(){
 	$(window).scroll(function(){

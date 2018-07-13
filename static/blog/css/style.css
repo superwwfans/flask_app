@@ -75,6 +75,7 @@ body, input, button, textarea, select {
 	display: block;
 }
 .header .logo a {
+
 	display: block;
 	overflow: hidden;
 	height: 124px;
@@ -88,13 +89,7 @@ body, input, button, textarea, select {
 	-ms-transition: all 0.8s ease-in-out;
 	transition: all 0.8s ease-in-out;
 }
-.header .logo a:hover {
-	-moz-transform: rotate(360deg);
-	-webkit-transform: rotate(360deg);
-	-o-transform: rotate(360deg);
-	-ms-transform: rotate(360deg);
-	transform: rotate(360deg);
-}
+
 .hidden-xs-nav, .header-xs-nav {
 	color: #444;
 	font-size: 16px;

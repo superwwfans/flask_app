@@ -17,6 +17,12 @@ for b in blueprints:
     app.register_blueprint(b)
 
 
+@app.route('/error')
+def error_test():
+    a = 1/0
+    return a
+
+
 @app.errorhandler(CSRFError)
 def csrf_error(reason):
     return render_template('403.html', reason=reason), 403

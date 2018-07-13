@@ -25,4 +25,7 @@ def search_libs(content):
         }
         return context
     else:
-         return None
+        context = {
+            "articles": '',
+        }
+        return context

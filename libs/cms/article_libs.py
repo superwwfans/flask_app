@@ -25,7 +25,8 @@ model_dict = {
 
 
 def system_info_libs():
-    """ 获取系统信息
+    """
+    获取系统信息
     :return:
     """
     try:
@@ -47,7 +48,8 @@ def system_info_libs():
 
 
 def _get_pagination(class_name, page):
-    """获取分页
+    """
+    获取分页
     :param class_name: 模型类
     :param page: 页数
     :return:
@@ -62,7 +64,8 @@ def _get_pagination(class_name, page):
 
 
 def get_articles_list_libs(page):
-    """ 获取文章分页列表
+    """
+    获取文章分页列表
     :param page:
     :return:
     """
@@ -75,7 +78,8 @@ def get_articles_list_libs(page):
 
 
 def get_comments_list_libs(page):
-    """ 获取评论分页列表
+    """
+    获取评论分页列表
     :param page:
     :return:
     """
@@ -183,7 +187,8 @@ def get_category_libs(category_id):
 
 
 def delete_category_libs(category_id):
-    """ 删除分类
+    """
+    删除分类
     :param category_id: 分类id
     :return: 删除按id查找的分类
     """
@@ -200,7 +205,8 @@ def delete_category_libs(category_id):
 
 
 def delete_article_libs(article_id):
-    """ 删除文章
+    """
+    删除文章
     :param article_id:
     :return:
     """
@@ -214,3 +220,24 @@ def delete_article_libs(article_id):
         db.session.rollback()
         print('删除分类异常', traceback.format_exc())
         return {'status': False, 'msg': '删除文章异常!'}
+
+
+def delete_comment_libs(comment_id):
+    """
+    删除评论
+    :param comment_id:
+    :return:
+    """
+    if comment_id:
+        try:
+            comment = Comment.query.filter_by(id=comment_id).first()
+            db.session.delete(comment)
+            db.session.commit()
+            return {'status': True, 'msg': '删除评论成功!'}
+        except:
+            db.session.rollback()
+            return {'status': False, 'msg': '删除文章失败!'}
+    else:
+        return {'status': False, 'msg': '删除文章失败!'}
+
+

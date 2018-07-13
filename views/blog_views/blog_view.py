@@ -99,3 +99,8 @@ def add_like():
     if result['status'] is True:
         return jsonify({'code': 1, 'msg': result['msg']})
     return jsonify({'code': 0, 'msg': result['msg']})
+
+
+@blog_blueprint.route('/about_me/')
+def about_me():
+    return render_template('blog/about.html')

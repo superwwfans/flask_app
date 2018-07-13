@@ -1,0 +1,36 @@
+2018-05-29 21:37:41,095 WARN Failed to clean up '/tmp/celeryworker-stdout---supervisor-JYKJU7.log'
+2018-05-29 21:37:41,098 INFO daemonizing the supervisord process
+2018-05-29 21:37:41,098 INFO supervisord started with pid 16532
+2018-05-29 21:37:42,101 INFO spawnerr: unknown error making dispatchers for 'celeryworker': EACCES
+2018-05-29 21:37:42,103 INFO spawned: 'flask_app' with pid 16573
+2018-05-29 21:37:42,119 INFO exited: flask_app (exit status 1; not expected)
+2018-05-29 21:37:43,121 INFO spawnerr: unknown error making dispatchers for 'celeryworker': EACCES
+2018-05-29 21:37:43,123 INFO spawned: 'flask_app' with pid 16574
+2018-05-29 21:37:43,142 INFO exited: flask_app (exit status 1; not expected)
+2018-05-29 21:37:45,148 INFO spawnerr: unknown error making dispatchers for 'celeryworker': EACCES
+2018-05-29 21:37:45,149 INFO spawned: 'flask_app' with pid 16575
+2018-05-29 21:37:45,167 INFO exited: flask_app (exit status 1; not expected)
+2018-05-29 21:37:48,174 INFO spawnerr: unknown error making dispatchers for 'celeryworker': EACCES
+2018-05-29 21:37:48,174 INFO gave up: celeryworker entered FATAL state, too many start retries too quickly
+2018-05-29 21:37:48,175 INFO spawned: 'flask_app' with pid 16584
+2018-05-29 21:37:48,184 INFO exited: flask_app (exit status 1; not expected)
+2018-05-29 21:37:49,185 INFO gave up: flask_app entered FATAL state, too many start retries too quickly
+2018-05-29 21:51:49,365 WARN Failed to clean up '/tmp/celeryworker-stdout---supervisor-JYKJU7.log'
+2018-05-29 21:51:49,367 INFO daemonizing the supervisord process
+2018-05-29 21:51:49,367 INFO supervisord started with pid 17645
+2018-05-29 21:51:50,371 INFO spawned: 'flask_app' with pid 17686
+2018-05-29 21:51:50,374 INFO spawnerr: unknown error making dispatchers for 'celeryworker': EACCES
+2018-05-29 21:51:50,393 INFO exited: flask_app (exit status 1; not expected)
+2018-05-29 21:51:51,395 INFO spawned: 'flask_app' with pid 17687
+2018-05-29 21:51:51,396 INFO spawnerr: unknown error making dispatchers for 'celeryworker': EACCES
+2018-05-29 21:51:51,403 INFO exited: flask_app (exit status 1; not expected)
+2018-05-29 21:51:53,406 INFO spawned: 'flask_app' with pid 17688
+2018-05-29 21:51:53,407 INFO spawnerr: unknown error making dispatchers for 'celeryworker': EACCES
+2018-05-29 21:51:53,412 INFO exited: flask_app (exit status 1; not expected)
+2018-05-29 21:51:56,415 INFO spawned: 'flask_app' with pid 17732
+2018-05-29 21:51:56,416 INFO spawnerr: unknown error making dispatchers for 'celeryworker': EACCES
+2018-05-29 21:51:56,416 INFO gave up: celeryworker entered FATAL state, too many start retries too quickly
+2018-05-29 21:51:56,420 INFO exited: flask_app (exit status 1; not expected)
+2018-05-29 21:51:57,422 INFO gave up: flask_app entered FATAL state, too many start retries too quickly
+2018-05-29 22:41:09,837 WARN received SIGTERM indicating exit request
+2018-05-29 22:41:09,840 WARN received SIGTERM indicating exit request

@@ -9,7 +9,7 @@
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from middleware import app
-from extra import db    
+from extra import db
 
 from model.user_models import User
 from model.artilce_model import Article, Tag, Category, Comment
@@ -34,6 +34,5 @@ def superuser(name, password):
     print('超级用户创建成功!!!')
 
 if __name__ == '__main__':
-    print(app.url_map)
 
     manager.run()

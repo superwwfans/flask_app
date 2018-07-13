@@ -94,7 +94,7 @@ def get_deticle_libs(article_id):
                     "comments": comments
                            }
                 return context
-            except SQLAlchemyError:
+            except Exception:
                 db.session.rollback()
     else:
         return
@@ -133,10 +133,11 @@ def get_category_articles_libs(category_name):
     category = Category.query.filter_by(name=category_name).first()
 
     if category:
-        articles = category.articles
-        return articles
+        articles_res = category.articles
+        articles = articles_res
     else:
-        return
+        articles = ''
+    return articles
 
 
 def article_add_like_libs(article_id, ip):

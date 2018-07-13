@@ -18,7 +18,7 @@
                 <td><input type="checkbox" class="input-control" name="checkbox[]" value="{{ comment.id }}" /></td>
                 <td class="article-title">{{ comment.content }}</td>
                 <td>{{ comment.create_time }}</td>
-                <td><a rel="1" name="see">查看</a> <a rel="1" name="delete">删除</a></td>
+                <td> <a href="/admin/delete_comment/?comment_id={{ comment.id }}" name="delete"><span class="label label-danger">删除</span></a></td>
               </tr>
             {% endfor %}
             </tbody>
@@ -50,44 +50,44 @@
       </form>
     {% endblock %}
 {% block script %}
-<script>
-$(function () {
-    $("#main table tbody tr td a").click(function () {
-        var name = $(this);
-        var id = name.attr("rel"); //对应id   
-        if (name.attr("name") === "see") {
-            $.ajax({
-                type: "POST",
-                url: "/Comment/see",
-                data: "id=" + id,
-                cache: false, //不缓存此页面   
-                success: function (data) {
-                    var data = JSON.parse(data);
-                    $('.see-comment-id').html(data.id);
-                    $('.see-comment-page').html(data.page);
-                    $('.see-comment-content').html(data.content);
-                    $('.see-comment-ip').html(data.ip);
-                    $('.see-comment-address').html(data.address);
-                    $('.see-comment-system').html(data.system);
-                    $('.see-comment-browser').html(data.browser);
-                    $('#seeComment').modal('show');
-                }
-            });
-        } else if (name.attr("name") === "delete") {
-            if (window.confirm("此操作不可逆，是否确认？")) {
-                $.ajax({
-                    type: "POST",
-                    url: "/Comment/delete",
-                    data: "id=" + id,
-                    cache: false, //不缓存此页面   
-                    success: function (data) {
-                        window.location.reload();
-                    }
-                });
-            };
-        };
-        return false;
-    });
-});
-</script>
+{#<script>#}
+{#$(function () {#}
+{#    $("#main table tbody tr td a").click(function () {#}
+{#        var name = $(this);#}
+{#        var id = name.attr("rel"); //对应id   #}
+{#        if (name.attr("name") === "see") {#}
+{#            $.ajax({#}
+{#                type: "POST",#}
+{#                url: "/Comment/see",#}
+{#                data: "id=" + id,#}
+{#                cache: false, //不缓存此页面   #}
+{#                success: function (data) {#}
+{#                    var data = JSON.parse(data);#}
+{#                    $('.see-comment-id').html(data.id);#}
+{#                    $('.see-comment-page').html(data.page);#}
+{#                    $('.see-comment-content').html(data.content);#}
+{#                    $('.see-comment-ip').html(data.ip);#}
+{#                    $('.see-comment-address').html(data.address);#}
+{#                    $('.see-comment-system').html(data.system);#}
+{#                    $('.see-comment-browser').html(data.browser);#}
+{#                    $('#seeComment').modal('show');#}
+{#                }#}
+{#            });#}
+{#        } else if (name.attr("name") === "delete") {#}
+{#            if (window.confirm("此操作不可逆，是否确认？")) {#}
+{#                $.ajax({#}
+{#                    type: "POST",#}
+{#                    url: "/Comment/delete",#}
+{#                    data: "id=" + id,#}
+{#                    cache: false, //不缓存此页面   #}
+{#                    success: function (data) {#}
+{#                        window.location.reload();#}
+{#                    }#}
+{#                });#}
+{#            };#}
+{#        };#}
+{#        return false;#}
+{#    });#}
+
+{#</script>#}
 {% endblock %}
