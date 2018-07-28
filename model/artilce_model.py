@@ -9,6 +9,8 @@
 from uuid import uuid4
 from datetime import datetime
 
+from jieba.analyse.analyzer import ChineseAnalyzer
+
 from extra import db
 from libs.search_libs.searchmixin import SearchableMixin
 
@@ -43,8 +45,9 @@ class ArticleToTag(db.Model):
 
 class Article(SearchableMixin, db.Model):
     """文章表"""
-    __searchable__ = ['content']
     __tablename__ = 'article_article'
+    __searchable__ = ['title', 'content']
+    __analyzer__ = ChineseAnalyzer()
 
     id = db.Column(db.Integer, primary_key=True)
     uuid = db.Column(db.String(36), unique=True, nullable=False, default=lambda: str(uuid4()))
@@ -69,8 +72,8 @@ class Article(SearchableMixin, db.Model):
 
     ips = db.relationship('Record', secondary=UserLikeArticle.__table__)
 
-db.event.listen(db.session, 'before_commit', Article.before_commit)
-db.event.listen(db.session, 'after_commit', Article.after_commit)
+# db.event.listen(db.session, 'before_commit', Article.before_commit)
+# db.event.listen(db.session, 'after_commit', Article.after_commit)
 
 
 class Category(db.Model):

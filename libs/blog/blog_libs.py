@@ -72,7 +72,7 @@ def article_list_libs(page):
     return context
 
 
-def get_deticle_libs(article_id):
+def get_detail_libs(article_id):
     """
     获取文章详情页
     :param article_id:
@@ -81,23 +81,19 @@ def get_deticle_libs(article_id):
     if article_id:
         article = Article.query.filter_by(id=article_id).first()
         if article:
-            try:
-                article = article
-                tags = article.tags
-                comments = article.comments
-                article.read_num += 1
-                db.session.add(article)
-                db.session.commit()
-                context = {
-                    "article": article,
-                    "tags": tags,
-                    "comments": comments
-                           }
-                return context
-            except Exception:
-                db.session.rollback()
-    else:
-        return
+            tags = article.tags
+            comments = article.comments
+            article.read_num += 1
+            db.session.add(article)
+            db.session.commit()
+            context = {
+                "article": article,
+                "tags": tags,
+                "comments": comments
+                       }
+            return context
+    context = {}
+    return context
 
 
 def add_comment_libs(article_id, comment_content):

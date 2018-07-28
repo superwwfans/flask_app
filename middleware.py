@@ -8,6 +8,8 @@
 from flask import render_template, g
 from flask_wtf.csrf import CSRFError
 
+from flask_whooshalchemyplus import index_all
+
 from libs.blog.user_auth_libs import get_current_user
 from extra import app
 from blueprint_list import blueprints
@@ -16,9 +18,12 @@ from blueprint_list import blueprints
 for b in blueprints:
     app.register_blueprint(b)
 
+with app.app_context():
+    index_all(app)
 
-@app.route('/error')
-def error_test():
+
+@app.route("/error/")
+def error():
     a = 1/0
     return a
 

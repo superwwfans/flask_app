@@ -12,7 +12,7 @@ from flask import (Blueprint, render_template, send_from_directory,
                    request, redirect, url_for, jsonify, abort)
 
 
-from libs.blog.blog_libs import article_list_libs, get_deticle_libs,\
+from libs.blog.blog_libs import article_list_libs, get_detail_libs,\
                                 add_comment_libs, get_base_info, get_category_articles_libs, article_add_like_libs
 
 from libs.blog.search_libs import search_libs
@@ -41,7 +41,7 @@ def detail(article_id):
     :param article_id: 文章id
     :return:
     """
-    article_info_dict = get_deticle_libs(article_id)
+    article_info_dict = get_detail_libs(article_id)
     if context:
         return render_template('blog/content.html', **article_info_dict)
     else:

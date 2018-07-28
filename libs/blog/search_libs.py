@@ -19,7 +19,8 @@ def search_libs(content):
     :return:
     """
     if content:
-        articles, total = Article.search(content)
+        articles = Article.query.whoosh_search(content).all()
+        print(articles)
         context = {
             "articles": articles,
         }

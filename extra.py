@@ -15,6 +15,7 @@ from redis import Redis
 import logging
 from logging.handlers import RotatingFileHandler
 from elasticsearch import Elasticsearch
+import flask_whooshalchemyplus
 
 from utils.logs.sslsmpthandler import SSLSMTPHandler
 from config import Config
@@ -93,9 +94,9 @@ def create_app(config_class):
     db.init_app(app_instance)
     csrf.init_app(app_instance)
 
-    app_instance.elasticsearch = Elasticsearch([app_instance.config['ELASTICSEARCH_URL']]) \
-        if app_instance.config['ELASTICSEARCH_URL'] else None
-
+    # app_instance.elasticsearch = Elasticsearch([app_instance.config['ELASTICSEARCH_URL']]) \
+    #     if app_instance.config['ELASTICSEARCH_URL'] else None
+    flask_whooshalchemyplus.init_app(app_instance)
     set_app_log(app_instance)
     return app_instance
 
