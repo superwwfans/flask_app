@@ -10,7 +10,7 @@
 """
 from sqlalchemy.exc import SQLAlchemyError
 
-from extra import db
+from create_app import db
 from model.flink_models import Flink
 
 

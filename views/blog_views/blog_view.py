@@ -6,10 +6,9 @@
 """
     关于博客主页的视图函数
 """
-from threading import Lock
 
 from flask import (Blueprint, render_template, send_from_directory,
-                   request, redirect, url_for, jsonify, abort)
+                   request, redirect, url_for, jsonify, abort, Markup)
 
 
 from libs.blog.blog_libs import article_list_libs, get_detail_libs,\

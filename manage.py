@@ -8,8 +8,8 @@
 """
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
-from middleware import app
-from extra import db
+from app import app
+from create_app import db
 
 from model.user_models import User
 from model.artilce_model import Article, Tag, Category, Comment

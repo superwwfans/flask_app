@@ -15,7 +15,7 @@ from datetime import datetime
 from sqlalchemy.exc import SQLAlchemyError
 from flask import session, request
 
-from extra import db
+from create_app import db
 from model.artilce_model import Record
 
 

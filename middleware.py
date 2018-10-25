@@ -17,15 +17,10 @@ from blueprint_list import blueprints
 
 for b in blueprints:
     app.register_blueprint(b)
+#
+# with app.app_context():
+#     index_all(app)
 
-with app.app_context():
-    index_all(app)
-
-
-@app.route("/error/")
-def error():
-    a = 1/0
-    return a
 
 
 @app.errorhandler(CSRFError)

@@ -12,7 +12,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from model.artilce_model import Article, Comment, Category, Tag, Record
 from model.flink_models import Flink
-from extra import db
+from create_app import db
 from send_email_task import send_email
 
 model_dict = {
@@ -72,6 +72,7 @@ def article_list_libs(page):
     return context
 
 
+
 def get_detail_libs(article_id):
     """
     获取文章详情页
@@ -87,9 +88,9 @@ def get_detail_libs(article_id):
             db.session.add(article)
             db.session.commit()
             context = {
-                "article": article,
+                "post": article,
                 "tags": tags,
-                "comments": comments
+                "comments": comments,
                        }
             return context
     context = {}

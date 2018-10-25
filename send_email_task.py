@@ -9,7 +9,7 @@ from __future__ import absolute_import
 import smtplib
 from email.mime.text import MIMEText
 from celery import Celery
-from extra import app
+from create_app import app
 
 celery_app = Celery(app.import_name)
 celery_app.conf.update(app.config)

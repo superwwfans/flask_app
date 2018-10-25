@@ -1,61 +1,75 @@
-﻿{% extends 'blog/base/base.html' %}
-  <!--/超小屏幕可见-->
+{% extends 'blog/base/base.html' %}
 
-    {% block content %}
-      <div class="content-block new-content">
-        <h2 class="title"><strong>最新文章</strong></h2>
-        <div class="row">
-          {% for article in articles %}
-            <div class="news-list">
-                <div class="news-img col-xs-5 col-sm-5 col-md-4">
-                    <a target="_blank" href="/article/detail/{{ article.id }}">
-                        <img src="{{ article.image_path }}" alt="" style="width: 180px; height: 105px">
-                    </a>
-                </div>
-                <div class="news-info col-xs-7 col-sm-7 col-md-8">
-                  <dl>
-                    <dt> <a href="/article/detail/{{ article.id }}" target="_blank" > {{ article.title }} </a> </dt>
-                    <dd>
-                        <span class="name glyphicon glyphicon-education">
-                            {{ article.users.username }}
-                        </span>
-                        <span class="identity"></span>
-                        <span class="time glyphicon glyphicon-time">
-                            {{ article.create_time }}
-                        </span>
-                    </dd>
-                    <dd class="text">{{ article.describe }}</dd>
-                  </dl>
-                  <div class="news_bot col-sm-7 col-md-8"> <span class="tags visible-lg visible-md">
-                      {% for tag in article.tags %}
-                        <a href="">{{ tag.name }}</a>
-                      {% endfor %}
-                    </span> <span class="look"> 共 <strong>{{ article.read_num }}</strong> 人阅读
-                  </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        <!--<div class="news-more" id="pagination">
-        	<a href="">查看更多</a>
-        </div>-->
-      </div>
-        <div class="quotes" style="margin-top:15px">
-          <nav>
-            <ul class="pagination pagenav">
-              <li {% if not pagination.has_prev %} class="disabled" {% endif %}>
-                  <a  href="{% if pagination.has_prev %}{{ url_for('blog.index', page = pagination.page - 1) }} {% else %} #{% endif %}" aria-label="Previous"> <span aria-hidden="true">上一页</span> </a>
-              </li>
-                {% for p in pagination.iter_pages() %}
-                    <li {% if pagination.page == p %} class="active"{% endif %}>
-                        <a href="{{ url_for('blog.index', page = p) }}">{{ p }}</a>
-                    </li>
-                {% endfor %}
-              <li  {% if not pagination.has_next %} class="disabled" {% endif %}>
-                  <a href="{% if pagination.has_next %}{{ url_for('blog.index', page = pagination.page + 1) }} {% else %} #{% endif %}" aria-label="Next"> <span aria-hidden="true">下一页</span> </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-    {% endblock %}
-  <!--/内容-->
+{% block head %}
+    <link href="/static/blog/css/index.css" rel="stylesheet">
+{% endblock %}
+
+{% block banner %}
+    <div class="banner">
+      <section class="box">
+        <ul class="texts">
+          <p>打了死结的青春，捆死一颗苍白绝望的灵魂。</p>
+          <p>为自己掘一个坟墓来葬心，红尘一梦，不再追寻。</p>
+          <p>加了锁的青春，不会再因谁而推开心门。</p>
+        </ul>
+        <div class="avatar"><a href="#"><span>dong</span></a> </div>
+      </section>
+    </div>
+{% endblock %}
+
+{% block article %}
+<article>
+  <h2 class="title_tj">
+    <p>文章<span>推荐</span></p>
+  </h2>
+  <div class="bloglist left">
+    {% for article in hot_articles %}
+        <h3>{{ article.title }}</h3>
+        <figure><img src="{{ article.image_path }}"></figure>
+        <ul>
+        <p>{{ article.describe  }}</p>
+            <a href="/article/detail/{{ article.id }}" target="_blank" class="readmore">阅读全文>></a>
+        </ul>
+        <p class="dateview"><span> {{ article.create_time }}</span><span>作者： {{ article.users.username }}</span><span>个人博客：[<a href="/category/{{ article.category.name  }}">{{ article.category.name }}</a>]</span></p>
+    {% endfor %}
+  </div>
+  <aside class="right">
+    <div class="weather"><iframe width="250" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&icon=1&num=1"></iframe></div>
+    <div class="news">
+    <h3>
+      <p>最新<span>文章</span></p>
+    </h3>
+    <ul class="rank">
+        {% for article in articles %}
+            <li><a href="/article/detail/{{ article.id }}" title="{{ article.title }}" target="_blank">{{ article.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <h3 class="ph">
+      <p>点击<span>排行</span></p>
+    </h3>
+    <ul class="paih">
+        {% for article in hot_articles %}
+            <li><a href="/article/detail/{{ article.id }}" title="{{ article.title }}" target="_blank">{{ article.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <h3 class="links">
+      <p>友情<span>链接</span></p>
+    </h3>
+    <ul class="website">
+      <li><a href="/">个人博客</a></li>
+      <li><a href="/">谢泽文个人博客</a></li>
+      <li><a href="/">3DST技术网</a></li>
+      <li><a href="/">思衡网络</a></li>
+    </ul> 
+    </div>  
+    <!-- Baidu Button BEGIN -->
+    <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare"><a class="bds_tsina"></a><a class="bds_qzone"></a><a class="bds_tqq"></a><a class="bds_renren"></a><span class="bds_more"></span><a class="shareCount"></a></div>
+    <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6574585" ></script> 
+    <script type="text/javascript" id="bdshell_js"></script> 
+    <script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script> 
+    <!-- Baidu Button END -->   
+    <a href="/" class="weixin"> </a></aside>
+</article>
+{% endblock %}

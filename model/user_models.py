@@ -10,7 +10,7 @@ import pbkdf2
 from uuid import uuid4
 import hashlib
 
-from extra import db
+from create_app import db
 from model.permission_model import UserToRole
 
 

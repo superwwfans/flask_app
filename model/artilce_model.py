@@ -9,9 +9,11 @@
 from uuid import uuid4
 from datetime import datetime
 
+from markdown import markdown
+import bleach
 from jieba.analyse.analyzer import ChineseAnalyzer
 
-from extra import db
+from create_app import db
 from libs.search_libs.searchmixin import SearchableMixin
 
 
@@ -46,8 +48,8 @@ class ArticleToTag(db.Model):
 class Article(SearchableMixin, db.Model):
     """文章表"""
     __tablename__ = 'article_article'
-    __searchable__ = ['title', 'content']
-    __analyzer__ = ChineseAnalyzer()
+    # __searchable__ = ['title', 'content']
+    # __analyzer__ = ChineseAnalyzer()
 
     id = db.Column(db.Integer, primary_key=True)
     uuid = db.Column(db.String(36), unique=True, nullable=False, default=lambda: str(uuid4()))
@@ -55,7 +57,9 @@ class Article(SearchableMixin, db.Model):
     describe = db.Column(db.Text)
     read_num = db.Column(db.Integer, default=0)
     content = db.Column(db.Text)
+    content_html = db.Column(db.Text)
     create_time = db.Column(db.DateTime, index=True, default=datetime.now)
+
 
     image_path = db.Column(db.String(100),)
 
@@ -72,6 +76,20 @@ class Article(SearchableMixin, db.Model):
 
     ips = db.relationship('Record', secondary=UserLikeArticle.__table__)
 
+    @staticmethod
+    def on_changed_body(target, value, oldvalue, initiator):
+        allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
+                        'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
+                        'h1', 'h2', 'h3', 'p', 'img', 'video', 'div', 'iframe', 'p', 'br', 'span', 'hr', 'src', 'class']
+        allowed_attrs = {'*': ['class'],
+                         'a': ['href', 'rel'],
+                         'img': ['src', 'alt']}
+        target.body_html = bleach.linkify(bleach.clean(
+            markdown(value, output_format='html'),
+            tags=allowed_tags, strip=True, attributes=allowed_attrs))
+
+
+db.event.listen(Article.content, 'set', Article.on_changed_body)
 # db.event.listen(db.session, 'before_commit', Article.before_commit)
 # db.event.listen(db.session, 'after_commit', Article.after_commit)
 

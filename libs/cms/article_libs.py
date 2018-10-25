@@ -12,7 +12,7 @@ import traceback
 from flask import request, g
 from sqlalchemy.exc import SQLAlchemyError
 
-from extra import db
+from create_app import db
 from libs.files_libs.files_libs import files_upload_libs
 from model.artilce_model import Article, Category, Comment, Tag, Record
 from model.user_models import User

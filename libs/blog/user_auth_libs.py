@@ -16,8 +16,8 @@ from datetime import datetime
 from sqlalchemy.exc import SQLAlchemyError
 from flask import session, redirect, url_for, g
 
-from extra import rd as conn
-from extra import db
+from create_app import rd as conn
+from create_app import db
 from utils.captcha.captcha import create_captcha
 from model.user_models import User
 

@@ -1,108 +1,34 @@
-{% extends "blog/base/base.html" %}
-  <!--/超小屏幕可见-->
-{% block content %}
-      <header class="news_header">
-        <h2>{{ article.title }}</h2>
-        <ul>
-          <li>{{ article.users.username }} 发布于 {{ article.create_time }}</li>
-          <li>栏目：<a href="" title="" target="_blank">{{ article.category.name }}</a></li>
-          <li>来源：<a href="" title="" target="_blank">个人原创</a></li>
-          <li>共 <strong>{{ article.read_num }}</strong> 人围观 </li>
-        </ul>
-      </header>
-      <article class="news_content">
-        {{ article.content | safe }}
-      </article>
-      <div class="reprint">转载请说明出处：<a href="" title="" target="_blank">python小屋</a> » <a href="" title="" target="_blank">欢迎来到python小屋</a></div>
-      <div class="zambia">
-          <a href="javascript:;" name="zambia" rel="" id="like-btn" article-id="{{ article.id }}">
-              <span class="glyphicon glyphicon-thumbs-up">
+{% extends 'blog/base/base.html' %}
 
-              </span> 赞（{{ article.ips|length }}）
-          </a>
-      </div>
-      <div class="tags news_tags">标签：
-          {% for tag in tags %}
-          <span data-toggle="tooltip" data-placement="bottom" title="查看关于 {{ tag.name }} 的文章"><a href="">{{ tag.name }}</a></span>
-          {% endfor %}
-      </div>
-{#      <nav class="page-nav"> <span class="page-nav-prev">上一篇<br />#}
-{#        <a href="" rel="prev">欢迎来到个人技术博客</a></span> <span class="page-nav-next">下一篇<br />#}
-{#        <a href="" rel="next">欢迎来到个人技术博客</a></span> #}
-{#      </nav>#}
-
-    <div class="content-block comment">
-        <h2 class="title"><strong>评论</strong></h2>
-        {% if g.current_user %}
-        <form action="/comment/" method="post" class="form-inline" id="comment-form">
-        <input type="hidden" class="csrf_token" name="csrf_token" value="{{ csrf_token() }}">
-          <input type="hidden" name="article_id" class="form-control" id="" value="{{ article.id }}">
-            <div class="comment-form">
-
-            <textarea placeholder="你的评论可以一针见血" name="commentContent"></textarea>
-            <div class="comment-form-footer">
-                <div class="comment-form-text">
-                </div>
-                <div class="comment-form-btn">
-                    <button type="submit" class="btn btn-default btn-comment">提交评论</button>
-                </div>
-            </div>
-          </div>
-        </form>
-        {% else %}
-            请先 <a href="/user/auth/login/">登录</a> 或 <a href="/user/auth/register/">注册</a>
-        {% endif %}
-        <div class="comment-content">
-          <ul>
-              {% for comment in comments %}
-                <li><span class="face"><img src="{{ comment.users.gravatar(size=50) }}" alt=""></span>
-                    <span class="text"><strong>{{ comment.users.username }}</strong> ({{ comment.create_time }}) 说：<br /></span>
-                    {{ comment.content }}
-                </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-  <!--/内容-->
+{% block head %}
+    <link href="/static/blog/css/about.css" rel="stylesheet">
 {% endblock %}
+
+{% block article %}
+<article >
+<h1 class="t_nav"><span>{{ post.title }}</span>
+    <a href="/" class="n1">网站首页</a><a href="/" class="n2"></a>
+</h1>
+<div class="left">
+     {{ post.content_html|safe }}
+</div>
+{#<aside class="right">  #}
+{#    <div class="about_c">#}
+{#    <p>网名：<span>DanceSmile</span> | 即步非烟</p>#}
+{#    <p>姓名：杨青 </p>#}
+{#    <p>生日：1987-10-30</p>#}
+{#    <p>籍贯：四川省—成都市</p>#}
+{#    <p>现居：天津市—滨海新区</p>#}
+{#    <p>职业：网站设计、网站制作</p>#}
+{#    <p>喜欢的书：《红与黑》《红楼梦》</p>#}
+{#    <p>喜欢的音乐：《burning》《just one last dance》《相思引》</p>#}
+{#<a target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=d4d4a26952d46d564ee5bf7782743a70d5a8c405f4f9a33a60b0eec380743c64">#}
+{#<img src="http://pub.idqqimg.com/wpa/images/group.png" alt="杨青个人博客网站" title="杨青个人博客网站"></a>#}
+{#<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=HHh9cn95b3F1cHVye1xtbTJ-c3E" ><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_22.png" alt="杨青个人博客网站"></a>#}
+{#</div>     #}
+{#</aside>#}
+</article>
+{% endblock %}
+
 {% block script %}
-<script>
-    $(document).ready(function(){
-        $("#like-btn").click(function(){
-            var article_id = $("#like-btn").attr("article-id");
-            $.ajax({
-                'url': '/add_like/',
-                'type': 'post',
-                'data': {
-                    'article_id': article_id
-                },
-                'success': function (data) {
-                    if (data["code"] == 1) {
-                        swal({
-                          title: "漂亮！",
-                          text: "谢谢您的认可!",
-                          imageUrl: "/static/blog/images/thumbs-up.jpg",
-                          'showCancelButton': false,
-                          'showConfirmButton': false,
-                          'timer': 1500
-                        },function (){
-                            location.reload()
-                        })
-                    }else {
-                        swal({
-                            'title': '提示',
-                            'text': data['msg'],
-                            'type': 'info',
-                            'showCancelButton': false,
-                            'showConfirmButton': false,
-                            'timer': 1500
-                        })
-                    }
-                }
-            })
-        })
-    });
-
-</script>
 {% endblock %}
-
